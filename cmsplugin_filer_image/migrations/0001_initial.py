@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FilerImage',
             fields=[
-                ('cmsplugin_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='cms.CMSPlugin')),
+                ('cmsplugin_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='cms.CMSPlugin', on_delete=models.CASCADE,)),
                 ('style', models.CharField(max_length=50, verbose_name='Style', default=settings.CMSPLUGIN_FILER_IMAGE_DEFAULT_STYLE, blank=True, choices=settings.CMSPLUGIN_FILER_IMAGE_STYLE_CHOICES)),
                 ('caption_text', models.CharField(max_length=255, null=True, verbose_name='caption text', blank=True)),
                 ('image_url', models.URLField(default=None, null=True, verbose_name='alternative image url', blank=True)),
@@ -40,7 +40,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(null=True, verbose_name='description', blank=True)),
                 ('target_blank', models.BooleanField(default=False, verbose_name='Open link in new window')),
                 ('file_link', filer.fields.file.FilerFileField(related_name='+', default=None, to='filer.File', blank=True, help_text='if present image will be clickable', null=True, verbose_name='file link')),
-                ('image', filer.fields.image.FilerImageField(default=None, blank=True, to='filer.Image', null=True, verbose_name='image')),
+                ('image', filer.fields.image.FilerImageField(default=None, blank=True, to='filer.Image', null=True, verbose_name='image', on_delete=models.SET_NULL,)),
                 ('page_link', cms.models.fields.PageField(blank=True, to='cms.Page', help_text='if present image will be clickable', null=True, verbose_name='page link')),
             ],
             options={
